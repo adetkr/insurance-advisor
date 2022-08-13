@@ -36,14 +36,14 @@ RSpec.describe Simulation, type: :model do
 
     describe 'enterprise number format validations' do
       let(:simulation) { build_stubbed :simulation, enterprise_number: enterprise_number }
-      let(:enterprise_number) { "0123456789" }
+      let(:enterprise_number) { '0123456789' }
 
       context 'when enterprise number is valid' do
         it { expect(simulation).to be_valid }
       end
 
       context 'when enterprise number is not valid' do
-        let(:enterprise_number) { "1123456789" }
+        let(:enterprise_number) { '1123456789' }
 
         it { expect(simulation).to be_invalid }
       end
