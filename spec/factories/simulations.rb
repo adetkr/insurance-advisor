@@ -20,6 +20,5 @@ FactoryBot.define do
     sequence(:enterprise_number) { '0123456789' }
     sequence(:company_legal_name) { |n| 'company_name_#{n}' }
     natural_person { true }
-    nacebel_codes { ['12345'] }
   end
 end
