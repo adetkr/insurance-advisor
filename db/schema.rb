@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_12_222423) do
+ActiveRecord::Schema.define(version: 2022_08_13_091045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,13 +25,28 @@ ActiveRecord::Schema.define(version: 2022_08_12_222423) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "nacebel_codes", force: :cascade do |t|
+    t.string "identifier", null: false
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "simulation_nacebel_codes", force: :cascade do |t|
+    t.bigint "simulation_id", null: false
+    t.bigint "nacebel_code_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["nacebel_code_id"], name: "index_simulation_nacebel_codes_on_nacebel_code_id"
+    t.index ["simulation_id"], name: "index_simulation_nacebel_codes_on_simulation_id"
+  end
+
   create_table "simulations", force: :cascade do |t|
     t.bigint "contact_id", null: false
     t.integer "annual_revenue"
     t.string "enterprise_number"
     t.string "company_legal_name"
     t.boolean "natural_person", default: false
-    t.text "nacebel_codes", default: [], array: true
     t.jsonb "quote", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -9,7 +9,6 @@
 #  enterprise_number  :string
 #  company_legal_name :string
 #  natural_person     :boolean          default(FALSE)
-#  nacebel_codes      :text             default([]), is an Array
 #  quote              :jsonb
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
