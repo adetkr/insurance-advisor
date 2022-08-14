@@ -9,7 +9,6 @@
 #  enterprise_number  :string
 #  company_legal_name :string
 #  natural_person     :boolean          default(FALSE)
-#  nacebel_codes      :text             default([]), is an Array
 #  quote              :jsonb
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -30,7 +29,6 @@ RSpec.describe Simulation, type: :model do
       expect(simulation).to validate_presence_of(:annual_revenue)
       expect(simulation).to validate_presence_of(:company_legal_name)
       expect(simulation).to validate_presence_of(:natural_person)
-      expect(simulation).to validate_presence_of(:nacebel_codes)
       expect(simulation).to validate_presence_of(:enterprise_number)
     end
 

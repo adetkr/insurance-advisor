@@ -27,6 +27,9 @@ module InsuranceAdvisor
       generate.test_framework :rspec, fixture: true, view_specs: false
       generate.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
+
+    config.autoloader = :zeitwerk
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 

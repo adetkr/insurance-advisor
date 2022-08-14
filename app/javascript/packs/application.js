@@ -8,6 +8,18 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import $ from 'jquery';
+import 'select2';
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+document.addEventListener("turbolinks:load", function() {
+    const initSelect2 = () => {
+      console.log('nhfjin');
+      $('.select2').select2();
+    };
+
+    initSelect2();
+});
