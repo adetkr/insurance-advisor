@@ -1,0 +1,12 @@
+<%# frozen_string_literal: true %>
+<h1>Dites nous en plus sur votre besoin</h1>
+
+<%= simple_form_for(simulation) do |f| %>
+  <%= f.hidden_field :contact_id, value: simulation.contact.id %>
+  <%= f.input :annual_revenue %>
+  <%= f.input :company_legal_name %>
+  <%= f.input :natural_person  %>
+  <%= f.input :nacebel_codes, as: :select, collection: NacebelCode.all.map { |code| ["#{code.identifier} - #{code.description}",code]}, input_html: { class: 'select2', multiple: true } %>
+  <%= f.input :enterprise_number %>
+  <%= f.submit %>
+<% end %>
