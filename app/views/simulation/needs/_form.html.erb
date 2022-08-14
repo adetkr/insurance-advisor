@@ -10,5 +10,7 @@
                                            input_html: { class: 'select2', multiple: true },
                                            include_hidden: false %>
   <%= f.input :enterprise_number %>
+  <%= f.input :coverage_ceiling_formula, as: :select, collection: ['small', 'large'] %>
+  <%= f.input :deductible_formula, as: :select, collection: ['small', 'medium', 'large'] %>
   <%= f.submit %>
 <% end %>

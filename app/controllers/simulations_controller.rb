@@ -29,6 +29,7 @@ class SimulationsController < ApplicationController
 
   def simulation_params
     params.require(:simulation).permit(:contact_id, :annual_revenue, :company_legal_name,
+                                       :coverage_ceiling_formula, :deductible_formula,
                                        :natural_person, :enterprise_number, nacebel_code_ids: []
                                       )
   end

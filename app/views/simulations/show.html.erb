@@ -2,23 +2,34 @@
 <h1>Voici les détails de votre simulation</h1>
 
 <% if @simulation.message %>
-  <p> <%= @simulation.quote["data"] %> </p>
-
-  <h2>Les détails de votre simulation</h2>
-
   <h3>Primes pour chacune des garanties disponibles</h2>
   <ul>
-      <% @simulation.quote["data"]["grossPremiums"].each do |cover, premium| %>
+    <% @simulation.data["grossPremiums"].each do |cover, premium| %>
       <li> <%= "#{cover} : #{premium}€" %></li>
-      <% end %>
+    <% end %>
   </ul>
   <h4>Deductible : <%= @simulation.data["deductible"] %></h4>
   <h4>Coverage Ceiling : <%= @simulation.data["coverageCeiling"] %></h4>
 
 
   <h3>Nos conseils</h2>
+  <% @simulation.nacebel_codes.where.not(recommendations: [nil, {}]).each do |nacebel_code| %>
+    <h4>Concernant l'activité <%= nacebel_code.identifier %></h4>
+
+    <p>Deductible Formula recommendation : <%= nacebel_code.deductible_formula %></p>
+    <p>Coverage Ceiling Formula recommendation: <%= nacebel_code.coverage_ceiling_formula %></p>
+    <% if nacebel_code.covers %>
+      <p>Covers recommendation: </p>
+      <ul>
+        <% nacebel_code.covers.each do |cover| %>
+          <li> <%= cover %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+
 <% else %>
-  <p> <%= @simulation.message%> </p>
+  <p> <%= @simulation.message %> </p>
 <% end %>
 
 <%= link_to 'Modifier la simulation', edit_simulation_contact_needs_path(@simulation.contact, simulation_id: @simulation.id) %>

@@ -20,7 +20,7 @@ class QuoteService
 
   attr_reader :simulation
 
-  delegate :annual_revenue, :company_legal_name,
+  delegate :annual_revenue, :company_legal_name, :deductible_formula, :coverage_ceiling_formula,
            :enterprise_number, :natural_person, :nacebel_codes, to: :simulation
 
   def data
@@ -29,7 +29,9 @@ class QuoteService
       enterpriseNumber: enterprise_number,
       legalName: company_legal_name,
       naturalPerson: natural_person,
-      nacebelCodes: nacebel_codes.map(&:identifier)
+      nacebelCodes: nacebel_codes.map(&:identifier),
+      deductibleFormula: deductible_formula || 'medium',
+      coverageCeilingFormula: coverage_ceiling_formula || 'small'
     }
   end
 

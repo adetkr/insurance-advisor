@@ -25,6 +25,8 @@ class Simulation < ApplicationRecord
 
   store_accessor :quote, :data, :message, :success
 
+  attr_accessor :coverage_ceiling_formula, :deductible_formula
+
   accepts_nested_attributes_for :nacebel_codes, allow_destroy: true
   accepts_nested_attributes_for :simulation_nacebel_codes, allow_destroy: true
 end
