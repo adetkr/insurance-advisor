@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe QuoteService do
   let(:headers) do
     {
-      'PARTNER-API-KEY' => 'good_api_key',
+      'X-Api-Key' => 'good_api_key',
       'Content-Type' => 'application/json'
     }
   end
