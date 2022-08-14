@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 class SimulationsController < ApplicationController
+  before_action :set_simulation, only: %i[show, update]
+  after_action :update_simulation_quote, only: %i[create update], if: :current_simulation_is_valid?
+
   def create
     @simulation = Simulation.new(simulation_params)
 
@@ -11,12 +14,10 @@ class SimulationsController < ApplicationController
   end
 
   def show
-    @simulation = Simulation.find(params[:id])
+    set_simulation
   end
 
   def update
-    @simulation = Simulation.find(params[:id])
-
     if @simulation.update(simulation_params)
       redirect_to simulation_path(@simulation)
     else
@@ -27,7 +28,20 @@ class SimulationsController < ApplicationController
   private
 
   def simulation_params
-    params.require(:simulation).permit(:contact_id, :annual_revenue, :company_legal_name, :natural_person, :enterprise_number)
-          .merge(params.require(:simulation).permit(nacebel_code_ids: []))
+    params.require(:simulation).permit(:contact_id, :annual_revenue, :company_legal_name,
+                                       :natural_person, :enterprise_number, nacebel_code_ids: []
+                                      )
+  end
+
+  def set_simulation
+    @simulation = Simulation.find(params[:id])
+  end
+
+  def update_simulation_quote
+    @simulation.update(quote: QuoteService.new(@simulation).post)
+  end
+
+  def current_simulation_is_valid?
+    @simulation.valid?
   end
 end

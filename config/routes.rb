@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :simulation do
     resource :profile, path: 'vos-informations', only: %i[show]
     resources :contacts, only: [] do
-      resource :need, path: 'votre-besoin', only: %i[show, edit]
+      resource :needs, path: 'votre-besoin', only: %i[show edit]
     end
   end
 end

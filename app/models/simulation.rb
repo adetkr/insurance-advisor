@@ -24,4 +24,5 @@ class Simulation < ApplicationRecord
                                         }
 
   accepts_nested_attributes_for :nacebel_codes, allow_destroy: true
+  accepts_nested_attributes_for :simulation_nacebel_codes, allow_destroy: true
 end

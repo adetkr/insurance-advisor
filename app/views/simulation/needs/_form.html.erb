@@ -6,7 +6,9 @@
   <%= f.input :annual_revenue %>
   <%= f.input :company_legal_name %>
   <%= f.input :natural_person  %>
-  <%= f.input :nacebel_codes, as: :select, collection: NacebelCode.all.map { |code| ["#{code.identifier} - #{code.description}",code]}, input_html: { class: 'select2', multiple: true } %>
+  <%= f.association :nacebel_codes, as: :select, collection: NacebelCode.all.map { |code| ["#{code.identifier} - #{code.description}", code.id]},
+                                           input_html: { class: 'select2', multiple: true },
+                                           include_hidden: false %>
   <%= f.input :enterprise_number %>
   <%= f.submit %>
 <% end %>

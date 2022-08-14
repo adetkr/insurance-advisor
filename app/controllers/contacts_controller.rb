@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
     if @contact.save
-      redirect_to simulation_contact_need_path(@contact)
+      redirect_to simulation_contact_needs_path(@contact)
     else
       render "simulation/profiles/show"
     end
