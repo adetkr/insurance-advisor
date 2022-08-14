@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class SimulationsController < ApplicationController
-  before_action :set_simulation, only: %i[show, update]
+  before_action :set_simulation, only: %i[show update]
   after_action :update_simulation_quote, only: %i[create update], if: :current_simulation_is_valid?
 
   def create
@@ -13,9 +13,7 @@ class SimulationsController < ApplicationController
     end
   end
 
-  def show
-    set_simulation
-  end
+  def show; end
 
   def update
     if @simulation.update(simulation_params)
