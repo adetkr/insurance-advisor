@@ -23,6 +23,8 @@ class Simulation < ApplicationRecord
                                           message: 'Enterprise number always start with 0 and is exactly 10 digits'
                                         }
 
+  store_accessor :quote, :data, :message, :success
+
   accepts_nested_attributes_for :nacebel_codes, allow_destroy: true
   accepts_nested_attributes_for :simulation_nacebel_codes, allow_destroy: true
 end

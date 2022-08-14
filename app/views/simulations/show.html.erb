@@ -1,7 +1,7 @@
 <%# frozen_string_literal: true %>
 <h1>Voici les détails de votre simulation</h1>
 
-<% if @simulation.quote["success"] %>
+<% if @simulation.message %>
   <p> <%= @simulation.quote["data"] %> </p>
 
   <h2>Les détails de votre simulation</h2>
@@ -12,13 +12,13 @@
       <li> <%= "#{cover} : #{premium}€" %></li>
       <% end %>
   </ul>
-  <h4>Deductible : <%= @simulation.quote["data"]["deductible"] %></h4>
-  <h4>Coverage Ceiling : <%= @simulation.quote["data"]["coverageCeiling"] %></h4>
+  <h4>Deductible : <%= @simulation.data["deductible"] %></h4>
+  <h4>Coverage Ceiling : <%= @simulation.data["coverageCeiling"] %></h4>
 
 
   <h3>Nos conseils</h2>
 <% else %>
-  <p> <%= @simulation.quote["message"]%> </p>
+  <p> <%= @simulation.message%> </p>
 <% end %>
 
 <%= link_to 'Modifier la simulation', edit_simulation_contact_needs_path(@simulation.contact, simulation_id: @simulation.id) %>
