@@ -36,4 +36,20 @@ RSpec.describe NacebelCode, type: :model do
       end
     end
   end
+
+  describe 'scopes' do
+    describe '.with_recommendations' do
+      subject { described_class.with_recommendations }
+
+      let!(:without_recommendation) { create :nacebel_code }
+      let!(:with_covers_recommendation) do
+        create :nacebel_code, recommendations: { covers: ['afterDelivery', 'publicLiability'] }
+      end
+      let!(:with_formula_recommendation) do
+        create :nacebel_code, recommendations: { deductible_formula: 'small' }
+      end
+
+      it { is_expected.to contain_exactly with_covers_recommendation, with_formula_recommendation }
+    end
+  end
 end

@@ -30,8 +30,8 @@ class QuoteService
       legalName: company_legal_name,
       naturalPerson: natural_person,
       nacebelCodes: nacebel_codes.map(&:identifier),
-      deductibleFormula: deductible_formula || 'medium',
-      coverageCeilingFormula: coverage_ceiling_formula || 'small'
+      deductibleFormula: deductible_formula.presence || 'medium',
+      coverageCeilingFormula: coverage_ceiling_formula.presence || 'small'
     }
   end
 

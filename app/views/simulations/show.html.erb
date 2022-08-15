@@ -11,20 +11,21 @@
   <h4>Deductible : <%= @simulation.data["deductible"] %></h4>
   <h4>Coverage Ceiling : <%= @simulation.data["coverageCeiling"] %></h4>
 
+  <% if @filtered_nacebel_codes.present? %>
+    <h3>Nos conseils</h2>
+    <% @filtered_nacebel_codes.each do |nacebel_code| %>
+      <h4>Concernant l'activité <%= nacebel_code.identifier %></h4>
 
-  <h3>Nos conseils</h2>
-  <% @simulation.nacebel_codes.where.not(recommendations: [nil, {}]).each do |nacebel_code| %>
-    <h4>Concernant l'activité <%= nacebel_code.identifier %></h4>
-
-    <p>Deductible Formula recommendation : <%= nacebel_code.deductible_formula %></p>
-    <p>Coverage Ceiling Formula recommendation: <%= nacebel_code.coverage_ceiling_formula %></p>
-    <% if nacebel_code.covers %>
-      <p>Covers recommendation: </p>
-      <ul>
-        <% nacebel_code.covers.each do |cover| %>
-          <li> <%= cover %></li>
-        <% end %>
-      </ul>
+      <p>Deductible Formula recommendation : <%= nacebel_code.deductible_formula %></p>
+      <p>Coverage Ceiling Formula recommendation: <%= nacebel_code.coverage_ceiling_formula %></p>
+      <% if nacebel_code.covers %>
+        <p>Covers recommendation: </p>
+        <ul>
+          <% nacebel_code.covers.each do |cover| %>
+            <li> <%= cover %></li>
+          <% end %>
+        </ul>
+      <% end %>
     <% end %>
   <% end %>
 

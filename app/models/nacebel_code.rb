@@ -18,4 +18,8 @@ class NacebelCode < ApplicationRecord
                                         }
 
   store_accessor :recommendations, :covers, :deductible_formula, :coverage_ceiling_formula
+
+  def self.with_recommendations
+    where.not(recommendations: [nil, {}])
+  end
 end
