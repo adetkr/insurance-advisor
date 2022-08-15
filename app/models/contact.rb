@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: contacts
@@ -12,7 +13,7 @@
 #  updated_at   :datetime         not null
 #
 class Contact < ApplicationRecord
-  has_many :simulations
+  has_many :simulations, dependent: :destroy
 
   validates :first_name, :last_name, :email,
             :address, :phone_number, presence: true

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: simulations
@@ -14,7 +15,7 @@
 #
 class Simulation < ApplicationRecord
   belongs_to :contact
-  has_many :simulation_nacebel_codes
+  has_many :simulation_nacebel_codes, dependent: :destroy
   has_many :nacebel_codes, through: :simulation_nacebel_codes
 
   validates :annual_revenue, :company_legal_name, :natural_person,
