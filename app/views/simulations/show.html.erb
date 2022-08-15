@@ -1,7 +1,7 @@
 <%# frozen_string_literal: true %>
 <h1>Voici les détails de votre simulation</h1>
 
-<% if @simulation.message %>
+<% if @simulation.success %>
   <h3>Primes pour chacune des garanties disponibles</h2>
   <ul>
     <% @simulation.data["grossPremiums"].each do |cover, premium| %>
@@ -30,7 +30,7 @@
   <% end %>
 
 <% else %>
-  <p> <%= @simulation.message %> </p>
+  <p> Désolé , une erreur est survenue lors du calcul de votre devis. Veuillez nous contacter. </p>
 <% end %>
 
 <%= link_to 'Modifier la simulation', edit_simulation_contact_needs_path(@simulation.contact, simulation_id: @simulation.id) %>
