@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: nacebel_codes
@@ -10,6 +11,7 @@
 #  recommendations :jsonb
 #
 class NacebelCode < ApplicationRecord
+  has_many :simulation_nacebel_codes, dependent: :destroy
   validates :identifier, presence: true
   validates :identifier, format: { with: /\d{5}/,
                                           message: 'Nacebel number always have 5 digits'

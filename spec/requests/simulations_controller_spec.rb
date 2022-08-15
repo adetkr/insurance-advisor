@@ -99,7 +99,7 @@ RSpec.describe SimulationsController, type: :request do
                             'natural_person': true, 'enterprise_number': '6789',
                             'nacebel_code_ids': [nacebel_code.id]
                           }
-        } 
+        }
       }
 
       it 'does not update simulation' do

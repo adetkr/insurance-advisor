@@ -31,7 +31,7 @@ RSpec.describe QuoteService do
                           nacebel_codes: [nacebel_code]
     end
     let(:response) { '{ "id": "1" }' }
-    let(:expected_body) {
+    let(:expected_body) do
       {
         annualRevenue: 123,
         enterpriseNumber: '0123456789',
@@ -41,7 +41,7 @@ RSpec.describe QuoteService do
         deductibleFormula: 'small',
         coverageCeilingFormula: 'large'
       }
-    }
+    end
     subject(:post) { described_class.new(simulation).post }
 
     before do
