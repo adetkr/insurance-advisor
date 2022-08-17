@@ -78,4 +78,4 @@ jobs:
           CI: true
 
       - name: Report
-        run: ./cc-test-reporter after-build --exit-code $?
+        run: ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
