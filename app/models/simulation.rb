@@ -20,9 +20,7 @@ class Simulation < ApplicationRecord
 
   validates :annual_revenue, :company_legal_name, :natural_person,
             :enterprise_number, presence: true
-  validates :enterprise_number, format: { with: /0\d{9}/,
-                                          message: 'Enterprise number always start with 0 and is exactly 10 digits'
-                                        }
+  validates :enterprise_number, format: { with: /0\d{9}/ }
 
   store_accessor :quote, :data, :message, :success
 

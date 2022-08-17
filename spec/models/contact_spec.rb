@@ -22,4 +22,14 @@ RSpec.describe Contact, type: :model do
       expect(contact).to have_many(:simulations)
     end
   end
+
+  describe 'validations' do
+    context 'email validation' do
+      let(:contact) { build_stubbed :contact, email: 'wrong email' }
+
+      it 'does not validate' do
+        expect(contact).to be_invalid
+      end
+    end
+  end
 end
