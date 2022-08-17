@@ -9,9 +9,9 @@ jobs:
       postgres:
         image: postgres:13.3
         env:
-          POSTGRES_USER: ade
-          POSTGRES_PASSWORD: ade
-          POSTGRES_DB: ade_test
+          POSTGRES_USER: insurance_advisor
+          POSTGRES_PASSWORD: insurance_advisor
+          POSTGRES_DB: insurance_advisor_test
         ports: ["5432:5432"]
 
     steps:
@@ -54,11 +54,13 @@ jobs:
           bundle config set --local path 'vendor/bundle'
           bundle install --jobs 4 --retry 3
           yarn install
+      - name: setup env
+        run: |
+          echo "DATABASE_URL=postgres://insurance_advisor:insurance_advisor@localhost:5432/insurance_advisor_test" >> $GITHUB_ENV
 
       - name: Install databases
         run: |
-          bundle exec rails db:create
-          bundle exec rails db:migrate
+          RAILS_ENV=test bundle exec rails db:create db:migrate
 
       - name: Prepare report
         run: |
