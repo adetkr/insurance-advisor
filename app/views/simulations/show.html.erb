@@ -36,5 +36,5 @@
   <p> <%= t('simulations.show.error') %> </p>
 <% end %>
 
-<%= link_to t('simulations.show.edit_title'), edit_simulation_contact_needs_path(@simulation.contact, simulation_id: @simulation.id) %>
-<%= link_to t('simulations.show.new_title'), simulation_contact_needs_path(@simulation.contact) %>
+<%= link_to t('simulations.show.edit_title'), edit_funnel_contact_needs_path(@simulation.contact, simulation_id: @simulation.id) %>
+<%= link_to t('simulations.show.new_title'), funnel_contact_needs_path(@simulation.contact) %>

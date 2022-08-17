@@ -9,7 +9,7 @@ class SimulationsController < ApplicationController
     if @simulation.save
       redirect_to simulation_path(@simulation)
     else
-      render "simulation/needs/show"
+      render "funnel/needs/show"
     end
   end
 
@@ -21,7 +21,7 @@ class SimulationsController < ApplicationController
     if @simulation.update(simulation_params)
       redirect_to simulation_path(@simulation)
     else
-      render "simulation/needs/edit"
+      render "funnel/needs/edit"
     end
   end
 
