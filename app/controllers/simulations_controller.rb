@@ -9,17 +9,19 @@ class SimulationsController < ApplicationController
     if @simulation.save
       redirect_to simulation_path(@simulation)
     else
-      render "simulation/needs/show"
+      render "funnel/needs/show"
     end
   end
 
-  def show; end
+  def show
+    @filtered_nacebel_codes = @simulation.nacebel_codes.with_recommendations
+  end
 
   def update
     if @simulation.update(simulation_params)
       redirect_to simulation_path(@simulation)
     else
-      render "simulation/needs/edit"
+      render "funnel/needs/edit"
     end
   end
 

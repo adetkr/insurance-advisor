@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Simulation::NeedsController < ApplicationController
+class Funnel::NeedsController < ApplicationController
   def show
     @simulation = Simulation.new(contact: Contact.find(params[:contact_id]))
   end

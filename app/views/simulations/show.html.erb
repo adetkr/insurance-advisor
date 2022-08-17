@@ -1,25 +1,28 @@
 <%# frozen_string_literal: true %>
-<h1>Voici les détails de votre simulation</h1>
+<h1> <%= t('simulations.show.title') %></h1>
 
 <% if @simulation.success %>
-  <h3>Primes pour chacune des garanties disponibles</h2>
+  <h3><%= t('simulations.show.covers_title') %></h2>
   <ul>
     <% @simulation.data["grossPremiums"].each do |cover, premium| %>
       <li> <%= "#{cover} : #{premium}€" %></li>
     <% end %>
   </ul>
-  <h4>Deductible : <%= @simulation.data["deductible"] %></h4>
-  <h4>Coverage Ceiling : <%= @simulation.data["coverageCeiling"] %></h4>
+  <h4><%= "#{ t('simulations.show.deductible_formula') } : #{ @simulation.data["deductible"] }" %></h4>
+  <h4><%= "#{ t('simulations.show.coverage_ceiling_formula') } : #{ @simulation.data["coverageCeiling"] }" %></h4>
 
   <% if @filtered_nacebel_codes.present? %>
-    <h3>Nos conseils</h2>
+    <h3><%= t('simulations.show.advice_title') %></h2>
     <% @filtered_nacebel_codes.each do |nacebel_code| %>
-      <h4>Concernant l'activité <%= nacebel_code.identifier %></h4>
-
-      <p>Deductible Formula recommendation : <%= nacebel_code.deductible_formula %></p>
-      <p>Coverage Ceiling Formula recommendation: <%= nacebel_code.coverage_ceiling_formula %></p>
+      <h4><%= "#{ t('simulations.show.about_activity') } #{ nacebel_code.identifier }" %></h4>
+      <% if nacebel_code.deductible_formula %>
+        <p><%= "#{ t('simulations.show.deductible_formula_recommendation') } : #{ nacebel_code.deductible_formula }" %></p>
+      <% end %>
+      <% if nacebel_code.coverage_ceiling_formula %>
+        <p><%= "#{ t('simulations.show.coverage_ceiling_formula_recommendation') } : #{ nacebel_code.coverage_ceiling_formula }" %></p>
+      <% end %>
       <% if nacebel_code.covers %>
-        <p>Covers recommendation: </p>
+        <p> <%= "#{ t('simulations.show.covers_recommendation') }:" %> </p>
         <ul>
           <% nacebel_code.covers.each do |cover| %>
             <li> <%= cover %></li>
@@ -30,8 +33,8 @@
   <% end %>
 
 <% else %>
-  <p> Désolé , une erreur est survenue lors du calcul de votre devis. Veuillez nous contacter. </p>
+  <p> <%= t('simulations.show.error') %> </p>
 <% end %>
 
-<%= link_to 'Modifier la simulation', edit_simulation_contact_needs_path(@simulation.contact, simulation_id: @simulation.id) %>
-<%= link_to 'Commencer une nouvelle simulation', simulation_profile_path %>
+<%= link_to t('simulations.show.edit_title'), edit_funnel_contact_needs_path(@simulation.contact, simulation_id: @simulation.id) %>
+<%= link_to t('simulations.show.new_title'), funnel_contact_needs_path(@simulation.contact) %>

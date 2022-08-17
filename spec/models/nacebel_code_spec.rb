@@ -35,6 +35,60 @@ RSpec.describe NacebelCode, type: :model do
         it { expect(nacebel_code).to be_invalid }
       end
     end
+
+    describe 'recommendations correctness' do
+      let(:nacebel_code) { build_stubbed :nacebel_code, recommendations: recommendations }
+
+      before { nacebel_code.validate(:recommendations) }
+
+      context 'when recommendations are valid' do
+        let(:recommendations) do
+          {
+            covers: ['after_delivery'],
+            deductible_formula: 'small',
+            coverage_ceiling_formula: 'large'
+          }
+        end
+
+        it { expect(nacebel_code.errors[:recommendations]).to be_empty }
+      end
+
+      context 'when the covers recommendation are wrong' do
+        let(:recommendations) do
+          {
+            covers: ['after_delivery', 'random_guarantee'],
+            deductible_formula: 'small',
+            coverage_ceiling_formula: 'large'
+          }
+        end
+
+        it { expect(nacebel_code.errors[:recommendations].first).not_to be_empty }
+      end
+
+      context 'when the deductible recommendation is wrong' do
+        let(:recommendations) do
+          {
+            covers: ['after_delivery'],
+            deductible_formula: 'tiny',
+            coverage_ceiling_formula: 'large'
+          }
+        end
+
+        it { expect(nacebel_code.errors[:recommendations].first).not_to be_empty }
+      end
+
+      context 'when the coverage ceiling recommendation is wrong' do
+        let(:recommendations) do
+          {
+            covers: ['after_delivery'],
+            deductible_formula: 'small',
+            coverage_ceiling_formula: 'big'
+          }
+        end
+
+        it { expect(nacebel_code.errors[:recommendations].first).not_to be_empty }
+      end
+    end
   end
 
   describe 'scopes' do
@@ -43,7 +97,7 @@ RSpec.describe NacebelCode, type: :model do
 
       let!(:without_recommendation) { create :nacebel_code }
       let!(:with_covers_recommendation) do
-        create :nacebel_code, recommendations: { covers: ['afterDelivery', 'publicLiability'] }
+        create :nacebel_code, recommendations: { covers: ['after_delivery', 'public_liability'] }
       end
       let!(:with_formula_recommendation) do
         create :nacebel_code, recommendations: { deductible_formula: 'small' }

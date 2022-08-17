@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Simulation::ProfilesController < ApplicationController
+class Funnel::ProfilesController < ApplicationController
   def show
     @contact = Contact.new
   end

@@ -1,0 +1,56 @@
+fr:
+  activerecord:
+    errors:
+      models:
+        contact:
+          attributes:
+            first_name:
+              blank: Vous devez renseigner un prénom
+            last_name:
+              blank: Vous devez renseigner un nom
+            address:
+              blank: Vous devez renseigner une adresse
+            phone_number:
+              blank: Vous devez renseigner un numéro de téléphone
+            email:
+              blank: Vous devez renseigner un email
+              invalid: Votre adresse email n'est pas valide
+        simulation:
+          attributes:
+            annual_revenue:
+              blank: Vous devez renseigner un chiffre d'affaire
+              greater_than_or_equal_to: Le chiffre d'affaire doit être positif
+            company_legal_name:
+              blank: Vous devez renseigner le nom de votre société
+            natural_person:
+              blank: Vous devez renseigner ce champ
+            enterprise_number:
+              blank: Vous devez renseigner un numéro d'entreprise
+              invalid: Le numéro d'entreprise doit commencer par 0 et comporter 10 chiffres
+            email:
+              blank: Vous devez renseigner un email
+              invalid: Votre adresse email n'est pas valide
+        nacebel_code:
+          attributes:
+            identifier:
+              blank: Identifiant
+              invalid: l'denfifiant doit comporter 5 chiffres
+    models:
+    attributes:
+      all: &all
+        id: Identifiant
+        created_at: Créé le
+        updated_at: Mis à jour le
+      contact: &contact
+        <<: *all
+        email: Email
+        first_name: Prénom
+        last_name: Nom
+        phone_number: Téléphone
+        address: Adresse
+      simulation: &simulation
+        <<: *all
+        annual_revenue: Chiffre d'affaire
+        company_legal_name: Nom de la société
+        natural_person: Personne physique
+        enterprise_number: Numéro d'entreprise

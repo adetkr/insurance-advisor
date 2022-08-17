@@ -28,8 +28,8 @@ RSpec.describe Simulation, type: :model do
     it 'validates presence' do
       expect(simulation).to validate_presence_of(:annual_revenue)
       expect(simulation).to validate_presence_of(:company_legal_name)
-      expect(simulation).to validate_presence_of(:natural_person)
       expect(simulation).to validate_presence_of(:enterprise_number)
+      expect(simulation).to validate_numericality_of(:annual_revenue).is_greater_than_or_equal_to(0)
     end
 
     describe 'enterprise number format validations' do

@@ -3,9 +3,9 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
     if @contact.save
-      redirect_to simulation_contact_needs_path(@contact)
+      redirect_to funnel_contact_needs_path(@contact)
     else
-      render "simulation/profiles/show"
+      render "funnel/profiles/show"
     end
   end
 

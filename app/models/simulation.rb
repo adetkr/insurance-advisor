@@ -18,11 +18,10 @@ class Simulation < ApplicationRecord
   has_many :simulation_nacebel_codes, dependent: :destroy
   has_many :nacebel_codes, through: :simulation_nacebel_codes
 
-  validates :annual_revenue, :company_legal_name, :natural_person,
+  validates :annual_revenue, :company_legal_name,
             :enterprise_number, presence: true
-  validates :enterprise_number, format: { with: /0\d{9}/,
-                                          message: 'Enterprise number always start with 0 and is exactly 10 digits'
-                                        }
+  validates :annual_revenue, numericality: { greater_than_or_equal_to: 0 }
+  validates :enterprise_number, format: { with: /0\d{9}/ }
 
   store_accessor :quote, :data, :message, :success
 

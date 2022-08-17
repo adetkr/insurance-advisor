@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :contacts, only: [:create]
   resources :simulations, only: [:create, :show, :update]
 
-  namespace :simulation do
+  namespace :funnel do
     resource :profile, path: 'vos-informations', only: %i[show]
     resources :contacts, only: [] do
       resource :needs, path: 'votre-besoin', only: %i[show edit]

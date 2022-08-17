@@ -1,0 +1,5 @@
+fr:
+  profiles:
+    home:
+      title: Bienvenue sur votre simulateur d'assurance professionnel
+      new_simulation: Commencer votre simulation
