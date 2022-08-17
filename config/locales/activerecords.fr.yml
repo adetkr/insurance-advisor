@@ -19,6 +19,7 @@ fr:
           attributes:
             annual_revenue:
               blank: Vous devez renseigner un chiffre d'affaire
+              greater_than_or_equal_to: Le chiffre d'affaire doit être positif
             company_legal_name:
               blank: Vous devez renseigner le nom de votre société
             natural_person:

@@ -6,7 +6,7 @@
   <%= f.hidden_field :contact_id, value: simulation.contact.id %>
   <%= f.input :annual_revenue %>
   <%= f.input :company_legal_name %>
-  <%= f.input :natural_person  %>
+  <%= f.input :natural_person %>
   <%= f.association :nacebel_codes, as: :select, collection: NacebelCode.all.map { |code| ["#{code.identifier} - #{code.description}", code.id]},
                                            input_html: { class: 'select2', multiple: true },
                                            include_hidden: false %>
