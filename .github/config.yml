@@ -1,0 +1,74 @@
+name: Tests
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13.3
+        env:
+          POSTGRES_USER: ade
+          POSTGRES_PASSWORD: ade
+          POSTGRES_DB: ade_test
+        ports: ["5432:5432"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.3
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Cache bundle
+        uses: actions/cache@v1
+        env:
+          cache-name: bundle
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ env.cache-name }}-${{ hashFiles('**/Gemfile.lock') }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: yarn-cache
+        env:
+          cache-name: node_modules
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-npm-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        run: |
+          bundle config set --local path 'vendor/bundle'
+          bundle install --jobs 4 --retry 3
+          yarn install
+
+      - name: Prepare report
+        run: |
+          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+
+      - name: Build assets
+        run: bundle exec rails assets:precompile assets:clean
+
+      - name: Test
+        run: RUBYOPT='-W:deprecated' bundle exec rspec spec/
+        env:
+          CI: true
+
+      - name: Report
+        run: ./cc-test-reporter after-build --exit-code $?
