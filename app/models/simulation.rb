@@ -20,6 +20,7 @@ class Simulation < ApplicationRecord
 
   validates :annual_revenue, :company_legal_name, :natural_person,
             :enterprise_number, presence: true
+  validates :annual_revenue, numericality: { greater_than_or_equal_to: 0 }
   validates :enterprise_number, format: { with: /0\d{9}/ }
 
   store_accessor :quote, :data, :message, :success
