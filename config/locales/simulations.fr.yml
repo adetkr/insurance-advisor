@@ -1,0 +1,15 @@
+fr:
+  simulations:
+    show:
+      title: Résultats de votre simulation
+      advice_title: Nos conseils pour bien choisir votre couverture
+      about_activity: Concernant l'activité
+      covers_title: Primes pour chacune des garanties disponibles
+      error: Désolé, une erreur est survenue lors du calcul de votre devis. Veuillez nous contacter.
+      edit_title: Modifier la simulation
+      new_title: Commencer une nouvelle simulation
+      deductible_formula_recommendation: Recommandation de formule de franchise
+      coverage_ceiling_formula_recommendation: Recommandation de formule de maximum de couverture
+      covers_recommendation: Recommandation de couvertures
+      deductible_formula: Franchise
+      coverage_ceiling_formula: Maximum de couverture

@@ -1,5 +1,6 @@
 <%# frozen_string_literal: true %>
-<h1>Dites nous en plus sur votre besoin</h1>
+
+<h1> <%= t('needs.form.title') %></h1>
 
 <%= simple_form_for(simulation) do |f| %>
   <%= f.hidden_field :contact_id, value: simulation.contact.id %>
