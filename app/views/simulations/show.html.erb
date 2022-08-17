@@ -8,18 +8,18 @@
       <li> <%= "#{cover} : #{premium}€" %></li>
     <% end %>
   </ul>
-  <h4><%= "#{ t('simulations.show.deductible_formula') } : #{ @simulation.data["deductible"] }" %></h4>
-  <h4><%= "#{ t('simulations.show.coverage_ceiling_formula') } : #{ @simulation.data["coverageCeiling"] }" %></h4>
+  <h4><%= SimulationDecorator.new(@simulation).display_deductible %></h4>
+  <h4><%= SimulationDecorator.new(@simulation).display_coverage_ceiling  %></h4>
 
   <% if @filtered_nacebel_codes.present? %>
     <h3><%= t('simulations.show.advice_title') %></h2>
     <% @filtered_nacebel_codes.each do |nacebel_code| %>
-      <h4><%= "#{ t('simulations.show.about_activity') } #{ nacebel_code.identifier }" %></h4>
+      <h4><%= NacebelCodeDecorator.new(nacebel_code).display_activity %></h4>
       <% if nacebel_code.deductible_formula %>
-        <p><%= "#{ t('simulations.show.deductible_formula_recommendation') } : #{ nacebel_code.deductible_formula }" %></p>
+        <p><%= NacebelCodeDecorator.new(nacebel_code).display_deductible_formula %></p>
       <% end %>
       <% if nacebel_code.coverage_ceiling_formula %>
-        <p><%= "#{ t('simulations.show.coverage_ceiling_formula_recommendation') } : #{ nacebel_code.coverage_ceiling_formula }" %></p>
+        <p><%= NacebelCodeDecorator.new(nacebel_code).display_coverage_ceiling_formula  %></p>
       <% end %>
       <% if nacebel_code.covers %>
         <p> <%= "#{ t('simulations.show.covers_recommendation') }:" %> </p>
