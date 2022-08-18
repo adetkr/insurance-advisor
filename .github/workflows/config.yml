@@ -1,0 +1,82 @@
+name: Tests
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13.3
+        env:
+          POSTGRES_USER: insurance_advisor
+          POSTGRES_PASSWORD: insurance_advisor
+          POSTGRES_DB: insurance_advisor_test
+        ports: ["5432:5432"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.4
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Cache bundle
+        uses: actions/cache@v1
+        env:
+          cache-name: bundle
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ env.cache-name }}-${{ hashFiles('**/Gemfile.lock') }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: yarn-cache
+        env:
+          cache-name: node_modules
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-npm-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        run: |
+          bundle config set --local path 'vendor/bundle'
+          bundle install --jobs 4 --retry 3
+          yarn install
+      - name: setup env
+        run: |
+          echo "DATABASE_URL=postgres://insurance_advisor:insurance_advisor@localhost:5432/insurance_advisor_test" >> $GITHUB_ENV
+          echo "CC_TEST_REPORTER_ID=f799133d77fdbaa06a76fd6a20aeefda031d79a0cf0dfa2e7ba0e6f59cfb30b0" >> $GITHUB_ENV
+
+      - name: Install databases
+        run: |
+          RAILS_ENV=test bundle exec rails db:create db:migrate
+
+      - name: Prepare report
+        run: |
+          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+
+      - name: Build assets
+        run: bundle exec rails assets:precompile assets:clean
+
+      - name: Test
+        run: RUBYOPT='-W:deprecated' bundle exec rspec spec/
+        env:
+          CI: true
+
+      - name: Report
+        run: ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
