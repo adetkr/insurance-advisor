@@ -57,6 +57,7 @@ jobs:
       - name: setup env
         run: |
           echo "DATABASE_URL=postgres://insurance_advisor:insurance_advisor@localhost:5432/insurance_advisor_test" >> $GITHUB_ENV
+          echo "CC_TEST_REPORTER_ID=f799133d77fdbaa06a76fd6a20aeefda031d79a0cf0dfa2e7ba0e6f59cfb30b0" >> $GITHUB_ENV
 
       - name: Install databases
         run: |
