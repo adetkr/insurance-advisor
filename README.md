@@ -59,14 +59,13 @@ Le choix d'organiser en mini-funnel me paraissait plus clair et permettait d'avo
 
 ## Structure de la base de donnée
 
-<img width="894" alt="Screenshot 2022-08-17 at 12 51 54" src="https://user-images.githubusercontent.com/66008397/185102812-7a158307-e6d9-401d-8083-8eb1b8873566.png">
-
+<img width="868" alt="Screenshot 2022-08-18 at 04 43 44" src="https://user-images.githubusercontent.com/66008397/185281528-f5a0bf9d-12d1-4007-9f88-91921e57afb3.png">
 
 Contacts: C'est la table où sont stockées les informations sur le prospect.
 
 Simulations: c'est la table qui stocke les informations concernant la demande de l'utilisateur mais également le résultat du devis. 
 
-NacebelCodes: C'est la table qui recense tout les code nacebel à fartir du fichier CSV. Elle permet de prposer à l'utilisateur lors de la création de la simulation de pouvoir choisir dans cette liste les activités qui correspondent à sa situation. Cette table contient également un attribut recommendations qui permet de renseigner les différentes options conseillées par métier. Jai fait le choix de les renseigner par métier afin que cela soit plus flexible, et surtout potentiellement facilement éditable depuis un backoffice sans avoir besoin de rajouter du code.
+NacebelCodes: C'est la table qui recense tout les code nacebel à fartir du fichier CSV. Elle permet de prposer à l'utilisateur lors de la création de la simulation de pouvoir choisir dans cette liste les activités qui correspondent à sa situation. Cette table contient également un attribut recommendations qui permet de renseigner les différentes options conseillées par métier. J'ai fait le choix de les renseigner par métier afin que cela soit plus flexible, et surtout potentiellement facilement éditable depuis un backoffice sans avoir besoin de rajouter du code.
 
 
 ## Points à améliorer potentiellement
