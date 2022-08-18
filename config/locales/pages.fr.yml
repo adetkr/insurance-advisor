@@ -1,5 +1,5 @@
 fr:
-  profiles:
+  pages:
     home:
-      title: Bienvenue sur votre simulateur d'assurance professionnel
+      title: Bienvenue sur votre simulateur d'assurance RC professionnelle
       new_simulation: Commencer votre simulation
