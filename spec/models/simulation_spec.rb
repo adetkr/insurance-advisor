@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: simulations
@@ -17,7 +18,7 @@ require 'rails_helper'
 
 RSpec.describe Simulation, type: :model do
   let(:simulation) { build_stubbed :simulation }
-  
+
   describe 'relations' do
     it 'has relations' do
       expect(simulation).to belong_to(:contact)
