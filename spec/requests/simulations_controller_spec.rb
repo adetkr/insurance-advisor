@@ -1,20 +1,19 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SimulationsController, type: :request do
-  let!(:nacebel_code) { create :nacebel_code, recommendations: recommendations}
+  let!(:nacebel_code) { create :nacebel_code, recommendations: recommendations }
   let!(:recommendations) do
     { deductible_formula: 'small', coverage_ceiling_formula: 'small', covers: ['after_delivery'] }
   end
 
   describe 'show' do
-    let!(:simulation) { create :simulation , quote: quote, nacebel_codes: [nacebel_code] }
+    let!(:simulation) { create :simulation, quote: quote, nacebel_codes: [nacebel_code] }
     let!(:quote) do
       { success: true, data: { deductible: 1000,
                                coverageCeiling: 4000,
-                               grossPremiums: { liability: 100 }
-                             }
-      }
+                               grossPremiums: { liability: 100 } } }
     end
 
     before do
@@ -44,9 +43,8 @@ RSpec.describe SimulationsController, type: :request do
       {
         'simulation' => { 'annual_revenue': 999, 'company_legal_name': 'name',
                           'natural_person': true, 'enterprise_number': '0123456789',
-                          'nacebel_code_ids': [nacebel_code.id], contact_id: contact.id
-                        }
-      } 
+                          'nacebel_code_ids': [nacebel_code.id], contact_id: contact.id }
+      }
     }
     let(:quote_service) { instance_double(QuoteService) }
     let(:quote_response) { { 'awesome' => 'response' } }
@@ -75,9 +73,8 @@ RSpec.describe SimulationsController, type: :request do
         {
           'simulation' => { 'annual_revenue': 999, 'company_legal_name': 'name',
                             'natural_person': true, 'enterprise_number': '6789',
-                            'nacebel_code_ids': [nacebel_code.id], contact_id: contact.id
-                          }
-        } 
+                            'nacebel_code_ids': [nacebel_code.id], contact_id: contact.id }
+        }
       }
 
       it 'does not create simulation' do
@@ -91,9 +88,8 @@ RSpec.describe SimulationsController, type: :request do
       {
         'simulation' => { 'annual_revenue': 999, 'company_legal_name': 'new_name',
                           'natural_person': true, 'enterprise_number': '0123456789',
-                          'nacebel_code_ids': [nacebel_code.id], contact_id: simulation.contact.id
-                        }
-      } 
+                          'nacebel_code_ids': [nacebel_code.id], contact_id: simulation.contact.id }
+      }
     }
     let(:quote_service) { instance_double(QuoteService) }
     let(:quote_response) { { 'awesome' => 'update response' } }
@@ -120,8 +116,7 @@ RSpec.describe SimulationsController, type: :request do
         {
           'simulation' => { 'annual_revenue': 999, 'company_legal_name': 'new_name',
                             'natural_person': true, 'enterprise_number': '6789',
-                            'nacebel_code_ids': [nacebel_code.id]
-                          }
+                            'nacebel_code_ids': [nacebel_code.id] }
         }
       }
 

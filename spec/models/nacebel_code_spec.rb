@@ -44,7 +44,7 @@ RSpec.describe NacebelCode, type: :model do
       context 'when recommendations are valid' do
         let(:recommendations) do
           {
-            covers: ['after_delivery'],
+            covers: %w[after_delivery],
             deductible_formula: 'small',
             coverage_ceiling_formula: 'large'
           }
@@ -56,7 +56,7 @@ RSpec.describe NacebelCode, type: :model do
       context 'when the covers recommendation are wrong' do
         let(:recommendations) do
           {
-            covers: ['after_delivery', 'random_guarantee'],
+            covers: %w[after_delivery random_guarantee],
             deductible_formula: 'small',
             coverage_ceiling_formula: 'large'
           }
@@ -68,7 +68,7 @@ RSpec.describe NacebelCode, type: :model do
       context 'when the deductible recommendation is wrong' do
         let(:recommendations) do
           {
-            covers: ['after_delivery'],
+            covers: %w[after_delivery],
             deductible_formula: 'tiny',
             coverage_ceiling_formula: 'large'
           }
@@ -80,7 +80,7 @@ RSpec.describe NacebelCode, type: :model do
       context 'when the coverage ceiling recommendation is wrong' do
         let(:recommendations) do
           {
-            covers: ['after_delivery'],
+            covers: %w[after_delivery],
             deductible_formula: 'small',
             coverage_ceiling_formula: 'big'
           }
@@ -97,7 +97,7 @@ RSpec.describe NacebelCode, type: :model do
 
       let!(:without_recommendation) { create :nacebel_code }
       let!(:with_covers_recommendation) do
-        create :nacebel_code, recommendations: { covers: ['after_delivery', 'public_liability'] }
+        create :nacebel_code, recommendations: { covers: %w[after_delivery public_liability] }
       end
       let!(:with_formula_recommendation) do
         create :nacebel_code, recommendations: { deductible_formula: 'small' }
