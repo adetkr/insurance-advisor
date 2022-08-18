@@ -31,5 +31,13 @@ RSpec.describe Contact, type: :model do
         expect(contact).to be_invalid
       end
     end
+
+    context 'phone validation' do
+      let(:contact) { build_stubbed :contact, phone_number: 123 }
+
+      it 'does not validate' do
+        expect(contact).to be_invalid
+      end
+    end
   end
 end

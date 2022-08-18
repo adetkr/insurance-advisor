@@ -17,5 +17,6 @@ class Contact < ApplicationRecord
 
   validates :first_name, :last_name, :email,
             :address, :phone_number, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: { case_sensitive: false }
+  validates :phone_number, format: { with: /\d{10}/ }
 end

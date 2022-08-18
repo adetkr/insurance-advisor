@@ -12,9 +12,11 @@ fr:
               blank: Vous devez renseigner une adresse
             phone_number:
               blank: Vous devez renseigner un numéro de téléphone
+              invalid: Votre numéro n'est pas valide
             email:
               blank: Vous devez renseigner un email
               invalid: Votre adresse email n'est pas valide
+              taken: Cette adresse email est déjà prise
         simulation:
           attributes:
             annual_revenue:
