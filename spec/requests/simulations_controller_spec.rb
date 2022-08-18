@@ -2,16 +2,39 @@
 require 'rails_helper'
 
 RSpec.describe SimulationsController, type: :request do
-  let!(:nacebel_code) { create :nacebel_code }
+  let!(:nacebel_code) { create :nacebel_code, recommendations: recommendations}
+  let!(:recommendations) do
+    { deductible_formula: 'small', coverage_ceiling_formula: 'small', covers: ['after_delivery'] }
+  end
 
   describe 'show' do
-    let!(:simulation) { create :simulation }
+    let!(:simulation) { create :simulation , quote: quote, nacebel_codes: [nacebel_code] }
+    let!(:quote) do
+      { success: true, data: { deductible: 1000,
+                               coverageCeiling: 4000,
+                               grossPremiums: { liability: 100 }
+                             }
+      }
+    end
+
     before do
       get "/simulations/#{simulation.id}"
     end
 
-    it 'is successful' do
-      expect(response).to be_successful
+    context 'when quote is present and available' do
+      it 'is successful' do
+        expect(response).to be_successful
+        expect(response.body).to include('Franchise : 1000€')
+        expect(response.body).to include('liability : 100€')
+      end
+    end
+
+    context 'when quote is not present' do
+      let!(:quote) { nil }
+      it 'is successful' do
+        expect(response).to be_successful
+        expect(response.body).to include('Désolé, une erreur est survenue lors du calcul de votre devis. Veuillez nous contacter.')
+      end
     end
   end
 
